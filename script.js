@@ -14,7 +14,8 @@ const createTaskList = function () {
   const createTask = function () {
     const taskItem = document.createElement("li");
     taskItem.textContent = `Zadanie ${taskCount}`;
-    document.querySelector("ul").parentElement.appendChild(taskItem);
+    // document.querySelector("ul").parentElement.appendChild(taskItem);
+    taskList.appendChild(taskItem);
     taskCount++;
   };
   addTaskButton.addEventListener("click", createTask);
