@@ -35,6 +35,10 @@ function createTaskList() {
   taskListHeader.textContent = `Moja lista ${++listCount}`;
   taskList.appendChild(taskListHeader);
 
+  taskListHeader.addEventListener('click', function () {
+    editTaskListName(taskListHeader);
+  });
+
   const addTaskButton = addTask(taskList);
   taskList.appendChild(addTaskButton);
 
@@ -44,6 +48,29 @@ function createTaskList() {
 
   deleteTaskList.addEventListener('click', function () {
     taskList.remove();
+  });
+}
+
+function editTaskListName(taskListHeader) {
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = taskListHeader.textContent;
+
+  taskListHeader.textContent = '';
+  taskListHeader.appendChild(input);
+
+  input.focus();
+  input.select();
+
+  function saveNewListName() {
+    taskListHeader.textContent = input.value;
+  }
+
+  input.addEventListener('blur', saveNewListName);
+  input.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      saveNewListName();
+    }
   });
 }
 
@@ -68,6 +95,15 @@ function createTask(taskList) {
   taskItem.textContent = `Zadanie ${++taskCount}`;
   taskList.appendChild(taskItem);
 
+  taskItem.addEventListener('click', function () {
+    console.log('Zmiana nazwy');
+    editTaskName(taskItem);
+  });
+
+  // taskListHeader.addEventListener('click', function () {
+  //   editTaskListName(taskListHeader);
+  // });
+
   const checkboxItem = document.createElement('input');
   checkboxItem.type = 'checkbox';
   taskItem.appendChild(checkboxItem);
@@ -80,6 +116,37 @@ function createTask(taskList) {
     taskList.removeChild(taskItem);
   });
 }
+
+function editTaskName(taskItem) {
+  const taskInput = document.createElement('input');
+  taskInput.type = 'text';
+  taskInput.value = taskItem.textContent;
+
+  taskItem.textContent = '';
+  taskItem.appendChild(taskInput);
+
+  taskInput.focus();
+  taskInput.select();
+
+  function saveNewTaskName() {
+    taskItem.textContent = taskInput.value;
+  }
+
+  taskInput.addEventListener('blur', saveNewTaskName);
+  taskInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      saveNewTaskName();
+    }
+  });
+}
+
+//   input.addEventListener('blur', saveNewListName);
+//   input.addEventListener('keypress', function (event) {
+//     if (event.key === 'Enter') {
+//       saveNewListName();
+//     }
+//   });
+// }
 
 button.addEventListener('click', createTaskList);
 
