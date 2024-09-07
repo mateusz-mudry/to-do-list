@@ -1,4 +1,6 @@
 const button = document.querySelector('button');
+const checkboxItem = document.createElement('input');
+checkboxItem.type = 'checkbox';
 
 let listCount = 0;
 let taskCount = 0;
@@ -29,11 +31,29 @@ function createTaskList() {
   taskList.classList.toggle('taskListDiv');
   document.querySelector('main').appendChild(taskList);
 
+  const taskListHeader = document.createElement('div');
+  taskListHeader.textContent = `Moja lista ${++listCount}`;
+  taskList.appendChild(taskListHeader);
+
   const addTaskButton = addTask(taskList);
   taskList.appendChild(addTaskButton);
 
-  listCount++;
+  const deleteTaskList = document.createElement('button');
+  deleteTaskList.textContent = 'Usuń';
+  taskList.appendChild(deleteTaskList);
+
+  deleteTaskList.addEventListener('click', function () {
+    taskList.remove();
+  });
 }
+
+// const deleteButton = document.createElement('button');
+// deleteButton.textContent = `Usuń`;
+// taskItem.appendChild(deleteButton);
+
+// deleteButton.addEventListener('click', function () {
+//   taskList.removeChild(taskItem);
+// });
 
 function addTask(taskList) {
   const button = document.createElement('button');
@@ -44,13 +64,21 @@ function addTask(taskList) {
 
 function createTask(taskList) {
   const taskItem = document.createElement('div');
-  taskItem.classList.toggle('taskDiv');
-  taskItem.textContent = `Zadanie ${taskCount}`;
+  taskItem.classList.toggle(`taskDiv`);
+  taskItem.textContent = `Zadanie ${++taskCount}`;
   taskList.appendChild(taskItem);
-  taskCount++;
+
   const checkboxItem = document.createElement('input');
   checkboxItem.type = 'checkbox';
   taskItem.appendChild(checkboxItem);
+
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = `Usuń`;
+  taskItem.appendChild(deleteButton);
+
+  deleteButton.addEventListener('click', function () {
+    taskList.removeChild(taskItem);
+  });
 }
 
 button.addEventListener('click', createTaskList);

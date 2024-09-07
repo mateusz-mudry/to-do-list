@@ -15,3 +15,7 @@
 .deletedList {
   display: none;
 }
+
+.active {
+  background-color: rgb(141, 206, 12);
+}
