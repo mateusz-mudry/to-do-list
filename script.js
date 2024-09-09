@@ -95,8 +95,8 @@ function createTask(taskList) {
   taskItem.textContent = `Zadanie ${++taskCount}`;
   taskList.appendChild(taskItem);
 
-  const checkboxItem = document.createElement('input');
-  checkboxItem.type = 'checkbox';
+  const checkboxItem = document.createElement('button');
+  checkboxItem.textContent = 'Gotowe';
   taskItem.appendChild(checkboxItem);
 
   const deleteButton = document.createElement('button');
@@ -105,6 +105,11 @@ function createTask(taskList) {
 
   taskItem.addEventListener('click', function () {
     editTaskName(taskItem, checkboxItem, deleteButton);
+  });
+
+  checkboxItem.addEventListener('click', function () {
+    console.log('hello');
+    taskItem.classList.add('checked');
   });
 
   deleteButton.addEventListener('click', function () {
@@ -119,7 +124,7 @@ function editTaskName(taskItem, checkboxItem, deleteButton) {
   taskInput.type = 'text';
   taskInput.value = taskName;
 
-  taskItem.childNodes[0].nodeValue = ''; 
+  taskItem.childNodes[0].nodeValue = '';
 
   taskItem.insertBefore(taskInput, checkboxItem);
 
@@ -128,7 +133,7 @@ function editTaskName(taskItem, checkboxItem, deleteButton) {
 
   function saveNewTaskName() {
     const newTaskName = taskInput.value.trim();
-    taskItem.removeChild(taskInput); 
+    taskItem.removeChild(taskInput);
     taskItem.childNodes[0].nodeValue = newTaskName || 'Bez nazwy';
   }
 
@@ -139,7 +144,6 @@ function editTaskName(taskItem, checkboxItem, deleteButton) {
     }
   });
 }
-
 
 //============================================================
 
@@ -154,9 +158,9 @@ function editTaskName(taskItem, checkboxItem, deleteButton) {
 //     editTaskName(taskItem);
 //   });
 
-  // taskListHeader.addEventListener('click', function () {
-  //   editTaskListName(taskListHeader);
-  // });
+// taskListHeader.addEventListener('click', function () {
+//   editTaskListName(taskListHeader);
+// });
 
 //   const checkboxItem = document.createElement('input');
 //   checkboxItem.type = 'checkbox';
