@@ -91,45 +91,45 @@ function addTask(taskList) {
 
 function createTask(taskList) {
   const taskItem = document.createElement('div');
-  taskItem.classList.toggle(`taskDiv`);
+  taskItem.classList.toggle('taskDiv');
   taskItem.textContent = `Zadanie ${++taskCount}`;
   taskList.appendChild(taskItem);
-
-  taskItem.addEventListener('click', function () {
-    console.log('Zmiana nazwy');
-    editTaskName(taskItem);
-  });
-
-  // taskListHeader.addEventListener('click', function () {
-  //   editTaskListName(taskListHeader);
-  // });
 
   const checkboxItem = document.createElement('input');
   checkboxItem.type = 'checkbox';
   taskItem.appendChild(checkboxItem);
 
   const deleteButton = document.createElement('button');
-  deleteButton.textContent = `Usuń`;
+  deleteButton.textContent = 'Usuń';
   taskItem.appendChild(deleteButton);
+
+  taskItem.addEventListener('click', function () {
+    editTaskName(taskItem, checkboxItem, deleteButton);
+  });
 
   deleteButton.addEventListener('click', function () {
     taskList.removeChild(taskItem);
   });
 }
 
-function editTaskName(taskItem) {
+function editTaskName(taskItem, checkboxItem, deleteButton) {
+  const taskName = taskItem.childNodes[0].nodeValue.trim();
+
   const taskInput = document.createElement('input');
   taskInput.type = 'text';
-  taskInput.value = taskItem.textContent;
+  taskInput.value = taskName;
 
-  taskItem.textContent = '';
-  taskItem.appendChild(taskInput);
+  taskItem.childNodes[0].nodeValue = ''; 
+
+  taskItem.insertBefore(taskInput, checkboxItem);
 
   taskInput.focus();
   taskInput.select();
 
   function saveNewTaskName() {
-    taskItem.textContent = taskInput.value;
+    const newTaskName = taskInput.value.trim();
+    taskItem.removeChild(taskInput); 
+    taskItem.childNodes[0].nodeValue = newTaskName || 'Bez nazwy';
   }
 
   taskInput.addEventListener('blur', saveNewTaskName);
@@ -139,6 +139,62 @@ function editTaskName(taskItem) {
     }
   });
 }
+
+
+//============================================================
+
+// function createTask(taskList) {
+//   const taskItem = document.createElement('div');
+//   taskItem.classList.toggle(`taskDiv`);
+//   taskItem.textContent = `Zadanie ${++taskCount}`;
+//   taskList.appendChild(taskItem);
+
+//   taskItem.addEventListener('click', function () {
+//     console.log('Zmiana nazwy');
+//     editTaskName(taskItem);
+//   });
+
+  // taskListHeader.addEventListener('click', function () {
+  //   editTaskListName(taskListHeader);
+  // });
+
+//   const checkboxItem = document.createElement('input');
+//   checkboxItem.type = 'checkbox';
+//   taskItem.appendChild(checkboxItem);
+
+//   const deleteButton = document.createElement('button');
+//   deleteButton.textContent = `Usuń`;
+//   taskItem.appendChild(deleteButton);
+
+//   deleteButton.addEventListener('click', function () {
+//     taskList.removeChild(taskItem);
+//   });
+// }
+
+// function editTaskName(taskItem) {
+//   const taskInput = document.createElement('input');
+//   taskInput.type = 'text';
+//   taskInput.value = taskItem.textContent;
+
+//   taskItem.textContent = '';
+//   taskItem.appendChild(taskInput);
+
+//   taskInput.focus();
+//   taskInput.select();
+
+//   function saveNewTaskName() {
+//     taskItem.textContent = taskInput.value;
+//   }
+
+//   taskInput.addEventListener('blur', saveNewTaskName);
+//   taskInput.addEventListener('keypress', function (event) {
+//     if (event.key === 'Enter') {
+//       saveNewTaskName();
+//     }
+//   });
+// }
+
+//=================================================
 
 //   input.addEventListener('blur', saveNewListName);
 //   input.addEventListener('keypress', function (event) {
