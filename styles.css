@@ -5,12 +5,42 @@ body {
 header {
   height: 100px;
   width: 100vw;
-  background-color: antiquewhite;
+  border: 2px black solid;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 h1 {
   margin: 0;
   padding: 20px;
+  background-color: aqua;
+}
+
+header button {
+  height: 30px;
+  margin: 20px;
+}
+
+.searchbar {
+  background-color: aquamarine;
+  /* width: 300px; */
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.searchbar button {
+  height: 30px;
+}
+
+.searchInput {
+  height: 30px;
+  width: 100%;
+  margin: 20px;
+  box-sizing: border-box;
 }
 
 .taskListDiv {
