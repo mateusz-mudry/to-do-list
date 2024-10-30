@@ -32,22 +32,35 @@ function createTaskList() {
   document.querySelector('main').appendChild(taskList);
 
   const taskListHeader = document.createElement('div');
-  taskListHeader.textContent = `Moja lista ${++listCount}`;
+  // taskListHeader.textContent = `Moja lista ${++listCount}`;
+  taskListHeader.classList.add('tasklistHeader');
   taskList.appendChild(taskListHeader);
 
-  taskListHeader.addEventListener('click', function () {
-    editTaskListName(taskListHeader);
+  const taskListName = document.createElement('span');
+  taskListName.textContent = `Moja lista ${++listCount}`;
+  taskListName.classList.add('taskListName');
+  taskListHeader.appendChild(taskListName);
+
+  taskListName.addEventListener('click', function () {
+    editTaskListName(taskListName);
   });
 
+  const headerButtonContainer = document.createElement('div');
+  headerButtonContainer.classList.add('headerButtonContainer');
+  taskListHeader.appendChild(headerButtonContainer);
+
   const addTaskButton = addTask(taskList);
-  taskList.appendChild(addTaskButton);
+  headerButtonContainer.appendChild(addTaskButton);
 
   const deleteTaskList = document.createElement('button');
   deleteTaskList.textContent = 'Usuń';
-  taskList.appendChild(deleteTaskList);
+  headerButtonContainer.appendChild(deleteTaskList);
 
   deleteTaskList.addEventListener('click', function () {
-    taskList.remove();
+    const userConfirmed = confirm('Czy na pewno chcesz usunąć listę zadań?');
+    if (userConfirmed) {
+      taskList.remove();
+    }
   });
 }
 

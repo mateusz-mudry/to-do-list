@@ -54,7 +54,17 @@ header button {
   width: 65vw;
   border: 1px solid black;
   background-color: red;
-  margin-bottom: 20px;
+  margin: 20px 20px 0px 20px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.tasklistHeader {
+  display: flex;
+  border: 2px yellow solid;
+  background-color: aquamarine;
+  padding: 10px;
+  justify-content: space-between;
 }
 
 .taskDiv {
